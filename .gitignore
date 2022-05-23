@@ -6,7 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
-#
+# my settings
+gcp_auth_key/
 data/
 *.idea/
 

@@ -90,7 +90,7 @@ def main(args):
     df = data_processor.get_train_examples(args.train_path)
     df.to_csv(args.save_path, index=False)
     bucket_processor.upload_to_bucket(args.bucket_save_path, args.local_data_path)
-    print(args.print_tset)
+    print(args.print_test)
 
 
 if __name__ == "__main__":

@@ -90,6 +90,7 @@ def main(args):
     df = data_processor.get_train_examples(args.train_path)
     df.to_csv(args.save_path, index=False)
     bucket_processor.upload_to_bucket(args.bucket_save_path, args.local_data_path)
+    print(args.print_tset)
 
 
 if __name__ == "__main__":
@@ -110,5 +111,8 @@ if __name__ == "__main__":
 
     parser.add_argument("--bucket_save_path", type=str,default= "capston_data/text/train/preprocessed/beauty_health.csv")
     parser.add_argument("--local_data_path", type=str, default=ABS_PATH + "/../data/save/save.csv")
+
+
+    parser.add_argument("--print_test", type=str, default="hi")
     args = parser.parse_args()
     main(args)

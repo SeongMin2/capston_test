@@ -105,7 +105,7 @@ if __name__ == "__main__":
     parser.add_argument("--gcp_project_id", type=str, default="mlops-348504")
     parser.add_argument("--gcs_bucket_name", type=str, default="sm_mlops_data")
 
-    parser.add_arugment("--bucket_data_path", type=str, defaut= "capston_data/text/train/beauty_health.json")
+    parser.add_argument("--bucket_data_path", type=str, defaut= "capston_data/text/train/beauty_health.json")
     parser.add_argument("--local_save_path", type=str, default=ABS_PATH+"/data/train")
 
     parser.add_argument("--bucket_save_path", type=str,default= "capston_data/text/train/preprocessed/beauty_health.csv")

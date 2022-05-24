@@ -3,10 +3,13 @@ import numpy as np
 import re
 import json
 import argparse
+
 import os
 from ABS_PATH import ABS_PATH
 
 ABS_PATH = ABS_PATH
+KEY_PATH = ABS_PATH + "/gcp_auth_key/mlops-348504-1d12c4fc9b7d.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = KEY_PATH
 
 class Ft_Processor():
     def get_train_examples(self, data_dir):
@@ -91,6 +94,9 @@ if __name__ == "__main__":
     parser.add_argument("--valid_path", type=str, default=ABS_PATH+"/data/valid/beauty_health.json")
     parser.add_argument("--train_data_num", type=int, default=8)
     parser.add_argument("--save_path", type=str, default=ABS_PATH+"/data/save/save.csv")
+
+    parser.add_argument("--gcp_project", type=str, default="mlops-348504")
+    parser.add_argument("--gcs_bucket_name", type=str, default="sm-m")
 
 
     args = parser.parse_args()

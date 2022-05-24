@@ -12,7 +12,7 @@ class Bucket_processor():
         client = storage.Client(project=self.project_id)
         bucket = client.bucket(self.bucket_name)
 
-        blob= bucket.blob(bucket_data_path)
+        blob = bucket.blob(bucket_data_path)
         blob.download_to_filename(local_save_path)
         #blob = bucket.blob("capston_data/text/train/beauty_health.json")
 

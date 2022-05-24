@@ -95,10 +95,10 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--train_path", type=str, default=ABS_PATH+"/data/train/beauty_health.json")
+    parser.add_argument("--train_path", type=str, default=ABS_PATH+"/../data/train/beauty_health.json")
     parser.add_argument("--valid_path", type=str, default=ABS_PATH+"/data/valid/beauty_health.json")
     parser.add_argument("--train_data_num", type=int, default=8)
-    parser.add_argument("--save_path", type=str, default=ABS_PATH+"/data/save/save.csv")
+    parser.add_argument("--save_path", type=str, default=ABS_PATH+"/../data/save/save.csv")
 
 
     parser.add_argument("--auth_key_path" ,type=str, default=KEY_PATH)

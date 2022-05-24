@@ -3,7 +3,7 @@ import numpy as np
 import re
 import json
 import argparse
-from gcp.bucket import Bucket_processor
+from ..gcp.bucket import Bucket_processor
 import os
 from ABS_PATH import ABS_PATH
 

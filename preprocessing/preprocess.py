@@ -87,7 +87,8 @@ def main(args):
     bucket_processor.download_from_bucket(args.bucket_data_path, args.local_save_path)
 
     df = data_processor.get_train_examples(args.train_path)
-    df.to_csv(args.save_path)
+    df.to_csv(args.save_path, index=False)
+    bucket_processor.upload_to_bucket(args.bucket_save_path, args.local_data_path)
 
 
 if __name__ == "__main__":
@@ -98,11 +99,15 @@ if __name__ == "__main__":
     parser.add_argument("--train_data_num", type=int, default=8)
     parser.add_argument("--save_path", type=str, default=ABS_PATH+"/data/save/save.csv")
 
+
     parser.add_argument("--auth_key_path" ,type=str, default=KEY_PATH)
     parser.add_argument("--gcp_project_id", type=str, default="mlops-348504")
     parser.add_argument("--gcs_bucket_name", type=str, default="sm_mlops_data")
+
     parser.add_arugment("--bucket_data_path", type=str, defaut= "capston_data/text/train/beauty_health.json")
     parser.add_argument("--local_save_path", type=str, default=ABS_PATH+"/data/train")
 
+    parser.add_argument("--bucket_save_path", type=str,default= "capston_data/text/train/preprocessed/beauty_health.csv")
+    parser.add_argument("--local_data_path", type=str, default=ABS_PATH + "/data/save/save.csv")
     args = parser.parse_args()
     main(args)

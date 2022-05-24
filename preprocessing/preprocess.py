@@ -3,13 +3,13 @@ import numpy as np
 import re
 import json
 import argparse
-
+from gcp.bucket import Bucket_processor
 import os
 from ABS_PATH import ABS_PATH
 
 ABS_PATH = ABS_PATH
 KEY_PATH = ABS_PATH + "/gcp_auth_key/mlops-348504-1d12c4fc9b7d.json"
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = KEY_PATH
+#os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = KEY_PATH
 
 class Ft_Processor():
     def get_train_examples(self, data_dir):
@@ -81,10 +81,13 @@ class Ft_Processor():
         return data_df
 
 def main(args):
-    processor = Ft_Processor()
-    df = processor.get_train_examples(args.train_path)
-    df.to_csv(args.save_path)
+    data_processor = Ft_Processor()
+    bucket_processor = Bucket_processor(args.auth_key_path, args.gcp_project_id, args.gcs_bucket_name)
+    # gcs에 data가 있다고 가정함
+    bucket_processor.download_from_bucket(args.bucket_data_path, args.local_save_path)
 
+    df = data_processor.get_train_examples(args.train_path)
+    df.to_csv(args.save_path)
 
 
 if __name__ == "__main__":
@@ -95,9 +98,11 @@ if __name__ == "__main__":
     parser.add_argument("--train_data_num", type=int, default=8)
     parser.add_argument("--save_path", type=str, default=ABS_PATH+"/data/save/save.csv")
 
-    parser.add_argument("--gcp_project", type=str, default="mlops-348504")
-    parser.add_argument("--gcs_bucket_name", type=str, default="sm-m")
-
+    parser.add_argument("--auth_key_path" ,type=str, default=KEY_PATH)
+    parser.add_argument("--gcp_project_id", type=str, default="mlops-348504")
+    parser.add_argument("--gcs_bucket_name", type=str, default="sm_mlops_data")
+    parser.add_arugment("--bucket_data_path", type=str, defaut= "capston_data/text/train/beauty_health.json")
+    parser.add_argument("--local_save_path", type=str, default=ABS_PATH+"/data/train")
 
     args = parser.parse_args()
     main(args)

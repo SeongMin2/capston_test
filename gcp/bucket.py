@@ -1,7 +1,7 @@
 from google.cloud import storage
 import os
 
-class bucket_processor():
+class Bucket_processor():
     def __init__(self, auth_key_path, project_id, bucket_name):
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = auth_key_path
 

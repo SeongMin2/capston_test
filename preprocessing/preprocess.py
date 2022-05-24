@@ -5,7 +5,7 @@ import json
 import argparse
 from ..gcp.bucket import Bucket_processor
 import os
-from ABS_PATH import ABS_PATH
+from ..ABS_PATH import ABS_PATH
 
 ABS_PATH = ABS_PATH
 KEY_PATH = ABS_PATH + "/gcp_auth_key/mlops-348504-1d12c4fc9b7d.json"

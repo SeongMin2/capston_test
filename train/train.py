@@ -228,12 +228,13 @@ if __name__ == '__main__':
 
     parser.add_argument("--seed", type=int, default=42)
 
-    parser.add_argument("--data_path", type=str, default=ABS_PATH + '/data')
+    parser.add_argument("--data_path", type=str, default=ABS_PATH + '/../data')
     parser.add_argument("--output_path", type=str, default=ABS_PATH + '/output')
     parser.add_argument("--result_path", type=str, default=ABS_PATH + '/result')
     parser.add_argument("--personal_model_path", type=str, default= ABS_PATH + '/personal_models')
 
-    parser.add_argument("--train_data_name", type=str, default='/train/preprocessed/capston_data_text_train_preprocessed_beauty_health.csv')
+    #parser.add_argument("--train_data_name", type=str, default='/train/preprocessed/capston_data_text_train_preprocessed_beauty_health.csv')
+    parser.add_argument("--train_data_name", type=str, default="/save/save.csv")
 
     parser.add_argument("--train_data_num", type=int, default= 1000)
     parser.add_argument("--dev_data_num", type=int ,default=300)

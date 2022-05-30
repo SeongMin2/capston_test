@@ -24,7 +24,11 @@ import torch.nn as nn
 from torch.nn import CrossEntropyLoss, MSELoss
 from torch.nn import functional as F
 from torch.utils.data import DataLoader, Dataset
+
+from gcp.bucket import Bucket_processor
 from ABS_PATH import ABS_PATH
+
+KEY_PATH = ABS_PATH + "/gcp_auth_key/mlops-348504-1d12c4fc9b7d.json"
 
 
 def accuracy_function(real, pred):
@@ -95,6 +99,11 @@ def train_step(batch_item, epoch, batch, training, model, optimizer, device):
         return loss, acc
 
 def main(args,model_name_list):
+    bucket_processor = Bucket_processor(args.auth_key_path, args.gcp_project_id, args.gcs_bucket_name)
+    # gcs에 data가 있다고 가정함
+    bucket_processor.download_from_bucket(args.bucket_data_path, args.local_save_path)
+
+
     dt_now = datetime.now()
 
     # gpu count
@@ -229,18 +238,25 @@ if __name__ == '__main__':
     parser.add_argument("--seed", type=int, default=42)
 
     parser.add_argument("--data_path", type=str, default=ABS_PATH + '/../data')
-    parser.add_argument("--output_path", type=str, default=ABS_PATH + '/output')
-    parser.add_argument("--result_path", type=str, default=ABS_PATH + '/result')
-    parser.add_argument("--personal_model_path", type=str, default= ABS_PATH + '/personal_models')
+    parser.add_argument("--output_path", type=str, default=ABS_PATH + '/../output')
+    parser.add_argument("--result_path", type=str, default=ABS_PATH + '/../result')
+    parser.add_argument("--personal_model_path", type=str, default= ABS_PATH + '/../personal_models')
 
-    #parser.add_argument("--train_data_name", type=str, default='/train/preprocessed/capston_data_text_train_preprocessed_beauty_health.csv')
-    parser.add_argument("--train_data_name", type=str, default="/save/save.csv")
+    parser.add_argument("--train_data_name", type=str, default='/train/preprocessed/beauty_health.csv')
+    #parser.add_argument("--train_data_name", type=str, default="/save/save.csv")
 
     parser.add_argument("--train_data_num", type=int, default= 1000)
     parser.add_argument("--dev_data_num", type=int ,default=300)
 
     parser.add_argument("--is_personal_model", type=bool, default=False)
     parser.add_argument("--is_ensemble_test", type=bool, default=True)
+
+    parser.add_argument("--auth_key_path", type=str, default=KEY_PATH)
+    parser.add_argument("--gcp_project_id", type=str, default="mlops-348504")
+    parser.add_argument("--gcs_bucket_name", type=str, default="sm_mlops_data")
+
+    parser.add_argument("--bucket_data_path", type=str, default="capston_data/text/train/preprocessed/beauty_health.csv")
+    parser.add_argument("--local_save_path", type=str, default=ABS_PATH + "/../data/train/preprocessed/beauty_health.csv")
 
     # parser.add_argument("--model_name", type=str, default='kykim/electra-kor-base')
     # parser.add_argument("--model_name", type=str, default='monologg/koelectra-base-v3-discriminator')

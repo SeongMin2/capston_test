@@ -65,6 +65,7 @@ def train_step(batch_item, epoch, batch, training, model, optimizer, device):
         model.model.encoder.config.gradient_checkpointing = True
         model.model.decoder.config.gradient_checkpointing = True
         optimizer.zero_grad()
+        '''
         with torch.cuda.amp.autocast():
             output = model(input_ids=input_ids,
                            attention_mask=attention_mask,
@@ -74,7 +75,14 @@ def train_step(batch_item, epoch, batch, training, model, optimizer, device):
 
             loss = output.loss
             # loss2 = loss_function(labels, output.logits)
+        '''
+        output = model(input_ids=input_ids,
+                       attention_mask=attention_mask,
+                       decoder_input_ids=decoder_input_ids,
+                       decoder_attention_mask=decoder_attention_mask,
+                       labels=labels, return_dict=True)
 
+        loss = output.loss
         acc = accuracy_function(labels, output.logits)
 
         loss.backward()
@@ -107,14 +115,14 @@ def main(args,model_name_list):
     dt_now = datetime.now()
 
     # gpu count
-    n_gpu = torch.cuda.device_count()
+    #n_gpu = torch.cuda.device_count()
 
     # random seed 설정
     random.seed(args.seed)
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
-    if n_gpu > 0:
-        torch.cuda.manual_seed_all(args.seed)
+    #if n_gpu > 0:
+    #    torch.cuda.manual_seed_all(args.seed)
 
     # GPU 사용
     device = torch.device("cpu")  # cuda:0

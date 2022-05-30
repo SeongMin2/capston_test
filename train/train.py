@@ -123,9 +123,10 @@ def main(args,model_name_list):
     torch.manual_seed(args.seed)
     #if n_gpu > 0:
     #    torch.cuda.manual_seed_all(args.seed)
-
+    print("check1")
     # GPU 사용
     device = torch.device("cpu")  # cuda:0
+    print("check2----")
     '''
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 

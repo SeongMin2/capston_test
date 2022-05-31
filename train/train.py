@@ -83,6 +83,7 @@ def train_step(batch_item, epoch, batch, training, model, optimizer, device):
                        decoder_attention_mask=decoder_attention_mask,
                        labels=labels, return_dict=True)
         print('check8')
+        print(output)
         loss = output.loss
         print('check8.5')
         acc = accuracy_function(labels, output.logits)

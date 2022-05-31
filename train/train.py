@@ -155,7 +155,6 @@ def main(args,model_name_list):
 
     del data_df
 
-    print('check1')
     # Prepare optimizer
     param_optimizer = list(model.named_parameters())
     no_decay = ['bias', 'LayerNorm.bias', 'LayerNorm.weight']
@@ -177,16 +176,14 @@ def main(args,model_name_list):
 
     loss_plot, val_loss_plot = [], []
     acc_plot, val_acc_plot = [], []
-    print('check2')
+
     for epoch in range(args.num_epochs):
-        print('check3')
         total_loss, total_val_loss = 0, 0
         total_acc, total_val_acc = 0, 0
         tqdm_dataset = tqdm(enumerate(train_dataloader))
         pytorch_total_params = sum(p.numel() for p in model.parameters())
         print(pytorch_total_params)
         training = True
-        print('check4')
         for batch, batch_item in tqdm_dataset:
             # for item, value in batch_item.items():
             # print(item)
@@ -195,7 +192,7 @@ def main(args,model_name_list):
             batch_loss, batch_acc, lr = train_step(batch_item, epoch, batch, training,model,optimizer,device)
             total_loss += batch_loss
             total_acc += batch_acc
-
+            print('check6')
             tqdm_dataset.set_postfix({
                 'Epoch': epoch + 1,
                 'LR': lr,

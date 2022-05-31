@@ -49,12 +49,12 @@ def loss_function(real, pred, criterion = nn.CrossEntropyLoss()):
     return torch.sum(loss_)/torch.sum(mask)
 
 
-def train_step(batch_item, epoch, batch, training, model, optimizer, device):
-    input_ids = batch_item['input_ids'].to(device)
-    attention_mask = batch_item['attention_mask'].to(device)
-    decoder_input_ids = batch_item['decoder_input_ids'].to(device)
-    decoder_attention_mask = batch_item['decoder_attention_mask'].to(device)
-    labels = batch_item['labels'].to(device)
+def train_step(batch_item, epoch, batch, training, model, optimizer):#, device):
+    input_ids = batch_item['input_ids']#.to(device)
+    attention_mask = batch_item['attention_mask']#.to(device)
+    decoder_input_ids = batch_item['decoder_input_ids']#.to(device)
+    decoder_attention_mask = batch_item['decoder_attention_mask']#.to(device)
+    labels = batch_item['labels']#.to(device)
     # print(input_Ids)
     # print(attention_mask)
     # print(decoder_input_ids)
@@ -130,7 +130,7 @@ def main(args,model_name_list):
     #if n_gpu > 0:
     #    torch.cuda.manual_seed_all(args.seed)
     # GPU 사용
-    device = torch.device("cpu")  # cuda:0
+    #device = torch.device("cpu")  # cuda:0
     '''
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -142,7 +142,7 @@ def main(args,model_name_list):
     model = None
     for model_name in model_name_list:
         tokenizer = PreTrainedTokenizerFast.from_pretrained(model_name)
-        model = BartForConditionalGeneration.from_pretrained(model_name).to(device)
+        model = BartForConditionalGeneration.from_pretrained(model_name)#.to(device)
         config = BartConfig.from_pretrained(model_name)
 
     data_df, train_path = pd.DataFrame(), args.train_data_name
@@ -195,7 +195,7 @@ def main(args,model_name_list):
             # print(item)
             # print(value.shape)
             print('check5')
-            batch_loss, batch_acc, lr = train_step(batch_item, epoch, batch, training,model,optimizer,device)
+            batch_loss, batch_acc, lr = train_step(batch_item, epoch, batch, training,model,optimizer)#,device)
             total_loss += batch_loss
             total_acc += batch_acc
 
@@ -214,7 +214,7 @@ def main(args,model_name_list):
         tqdm_dataset = tqdm(enumerate(eval_dataloader))
         training = False
         for batch, batch_item in tqdm_dataset:
-            batch_loss, batch_acc = train_step(batch_item, epoch, batch, training, model,optimizer,device)
+            batch_loss, batch_acc = train_step(batch_item, epoch, batch, training, model,optimizer)#,device)
             # batch_item, epoch, batch, training,model,optimizer,device
             total_val_loss += batch_loss
             total_val_acc += batch_acc

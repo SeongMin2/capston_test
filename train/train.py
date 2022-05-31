@@ -179,7 +179,7 @@ def main(args,model_name_list):
     acc_plot, val_acc_plot = [], []
 
     for epoch in range(args.num_epochs):
-        gc.collect()
+        # gc.collect()
         total_loss, total_val_loss = 0, 0
         total_acc, total_val_acc = 0, 0
         tqdm_dataset = tqdm(enumerate(train_dataloader))

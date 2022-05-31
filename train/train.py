@@ -59,7 +59,7 @@ def train_step(batch_item, epoch, batch, training, model, optimizer, device):
     # print(attention_mask)
     # print(decoder_input_ids)
     # print(labels)
-
+    print('check6')
     if training is True:
         model.train()
         model.model.encoder.config.gradient_checkpointing = True
@@ -76,12 +76,13 @@ def train_step(batch_item, epoch, batch, training, model, optimizer, device):
             loss = output.loss
             # loss2 = loss_function(labels, output.logits)
         '''
+        print('check7')
         output = model(input_ids=input_ids,
                        attention_mask=attention_mask,
                        decoder_input_ids=decoder_input_ids,
                        decoder_attention_mask=decoder_attention_mask,
                        labels=labels, return_dict=True)
-
+        print('check8')
         loss = output.loss
         acc = accuracy_function(labels, output.logits)
 
@@ -192,7 +193,7 @@ def main(args,model_name_list):
             batch_loss, batch_acc, lr = train_step(batch_item, epoch, batch, training,model,optimizer,device)
             total_loss += batch_loss
             total_acc += batch_acc
-            print('check6')
+
             tqdm_dataset.set_postfix({
                 'Epoch': epoch + 1,
                 'LR': lr,

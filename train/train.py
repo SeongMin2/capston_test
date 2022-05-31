@@ -85,10 +85,13 @@ def train_step(batch_item, epoch, batch, training, model, optimizer, device):
         print('check8')
         loss = output.loss
         acc = accuracy_function(labels, output.logits)
+        print('check9')
 
         loss.backward()
+        print('check10')
 
         optimizer.step()
+        print('check11')
 
         lr = optimizer.param_groups[0]["lr"]
         return loss, acc, round(lr, 10)

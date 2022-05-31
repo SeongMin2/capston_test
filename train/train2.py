@@ -59,6 +59,7 @@ def train_step(batch_item, epoch, batch, training, model, optimizer):#, device):
     # print(attention_mask)
     # print(decoder_input_ids)
     # print(labels)
+    print('check6')
     if training is True:
         model.train()
         model.model.encoder.config.gradient_checkpointing = True
@@ -109,9 +110,9 @@ def train_step(batch_item, epoch, batch, training, model, optimizer):#, device):
         return loss, acc
 
 def main(args,model_name_list):
-    bucket_processor = Bucket_processor(args.auth_key_path, args.gcp_project_id, args.gcs_bucket_name)
+    #bucket_processor = Bucket_processor(args.auth_key_path, args.gcp_project_id, args.gcs_bucket_name)
     # gcs에 data가 있다고 가정함
-    bucket_processor.download_from_bucket(args.bucket_data_path, args.local_save_path)
+    #bucket_processor.download_from_bucket(args.bucket_data_path, args.local_save_path)
 
 
     dt_now = datetime.now()
@@ -190,6 +191,7 @@ def main(args,model_name_list):
             # for item, value in batch_item.items():
             # print(item)
             # print(value.shape)
+            print('check5')
             batch_loss, batch_acc, lr = train_step(batch_item, epoch, batch, training,model,optimizer)#,device)
             total_loss += batch_loss
             total_acc += batch_acc
@@ -242,12 +244,12 @@ if __name__ == '__main__':
 
     parser.add_argument("--seed", type=int, default=42)
 
-    parser.add_argument("--data_path", type=str, default=ABS_PATH + '/../data')
-    parser.add_argument("--output_path", type=str, default=ABS_PATH + '/../output')
-    parser.add_argument("--result_path", type=str, default=ABS_PATH + '/../result')
-    parser.add_argument("--personal_model_path", type=str, default= ABS_PATH + '/../personal_models')
+    parser.add_argument("--data_path", type=str, default=ABS_PATH + '/data')
+    parser.add_argument("--output_path", type=str, default=ABS_PATH + '/output')
+    parser.add_argument("--result_path", type=str, default=ABS_PATH + '/result')
+    parser.add_argument("--personal_model_path", type=str, default= ABS_PATH + '/personal_models')
 
-    parser.add_argument("--train_data_name", type=str, default='/train/preprocessed/beauty_health.csv')
+    parser.add_argument("--train_data_name", type=str, default='/train/preprocessed/capston_data_text_train_preprocessed_beauty_health.csv')
     #parser.add_argument("--train_data_name", type=str, default="/save/save.csv")
 
     parser.add_argument("--train_data_num", type=int, default= 1000)

@@ -91,7 +91,7 @@ def train_step(batch_item, epoch, batch, training, model, optimizer):#, device):
         optimizer.step()
 
 
-        lr = optimizer.param_groups[0]["lr"]
+        lr = optimizer.param_groups[0]["lr"]  
         return loss, acc, round(lr, 10)
     else:
         model.eval()

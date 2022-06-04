@@ -9,7 +9,7 @@ from gcp.bucket import Bucket_processor
 from ABS_PATH import ABS_PATH
 
 ABS_PATH = ABS_PATH
-KEY_PATH = ABS_PATH + "/../gcp_auth_key/mlops-348504-1d12c4fc9b7d.json"
+KEY_PATH = ABS_PATH + "/../gcp_auth_key/capstone-352301-ef799c59a451.json"
 #os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = KEY_PATH
 
 class Ft_Processor():

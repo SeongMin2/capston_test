@@ -28,7 +28,7 @@ from torch.utils.data import DataLoader, Dataset
 from gcp.bucket import Bucket_processor
 from ABS_PATH import ABS_PATH
 
-KEY_PATH = ABS_PATH + "/../gcp_auth_key/mlops-348504-1d12c4fc9b7d.json"
+KEY_PATH = ABS_PATH + "/../gcp_auth_key/capstone-352301-ef799c59a451.json"
 
 
 def accuracy_function(real, pred):
@@ -91,7 +91,7 @@ def train_step(batch_item, epoch, batch, training, model, optimizer):#, device):
         optimizer.step()
 
 
-        lr = optimizer.param_groups[0]["lr"]  
+        lr = optimizer.param_groups[0]["lr"]
         return loss, acc, round(lr, 10)
     else:
         model.eval()

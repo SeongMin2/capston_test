@@ -150,12 +150,14 @@ def main(args,model_name_list):
     train_data, eval_data = train_test_split(data_df, test_size=0.1, shuffle=True, random_state=args.seed)
 
     train_dataset = SummaryDataset(train_data, args.max_len, tokenizer)
-    train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size = args.batch_size, num_workers=1, shuffle=True)
+    #train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size = args.batch_size, num_workers=1, shuffle=True)
+    train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
 
     eval_dataset = SummaryDataset(eval_data, args.max_len, tokenizer)
-    eval_dataloader = torch.utils.data.DataLoader(eval_dataset, batch_size= args.batch_size, num_workers=1, shuffle=True)
+    #eval_dataloader = torch.utils.data.DataLoader(eval_dataset, batch_size= args.batch_size, num_workers=1, shuffle=True)
+    eval_dataloader = torch.utils.data.DataLoader(eval_dataset, batch_size= args.batch_size, shuffle=True)
 
-    del data_df
+    #del data_df
 
     # Prepare optimizer
     param_optimizer = list(model.named_parameters())
@@ -223,7 +225,7 @@ def main(args,model_name_list):
         val_loss_plot.append(total_val_loss / (batch + 1))
         val_acc_plot.append(total_val_acc / (batch + 1))
 
-    print("\nbye")
+    print(val_acc_plot)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

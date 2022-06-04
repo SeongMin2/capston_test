@@ -204,7 +204,7 @@ def main(args,model_name_list):
         loss_plot.append(total_loss / (batch + 1))
         acc_plot.append(total_acc / (batch + 1))
 
-        torch.save(model.state_dict(), 'epoch {} weight.pt'.format(epoch + 1))
+        #torch.save(model.state_dict(), 'epoch {} weight.pt'.format(epoch + 1))
 
         tqdm_dataset = tqdm(enumerate(eval_dataloader))
         training = False

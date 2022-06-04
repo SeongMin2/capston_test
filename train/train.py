@@ -257,8 +257,8 @@ if __name__ == '__main__':
     parser.add_argument("--is_ensemble_test", type=bool, default=True)
 
     parser.add_argument("--auth_key_path", type=str, default=KEY_PATH)
-    parser.add_argument("--gcp_project_id", type=str, default="mlops-348504")
-    parser.add_argument("--gcs_bucket_name", type=str, default="sm_mlops_data")
+    parser.add_argument("--gcp_project_id", type=str, default="capstone-352301")
+    parser.add_argument("--gcs_bucket_name", type=str, default="capstone_mlops_data")
 
     parser.add_argument("--bucket_data_path", type=str, default="capston_data/text/train/preprocessed/beauty_health.csv")
     parser.add_argument("--local_save_path", type=str, default=ABS_PATH + "/../data/train/preprocessed/beauty_health.csv")

@@ -206,7 +206,7 @@ def main(args,model_name_list):
         loss_plot.append(total_loss / (batch + 1))
         acc_plot.append(total_acc / (batch + 1))
 
-        torch.save(model.state_dict(), 'epoch {} weight.pt'.format(epoch + 1))
+        #torch.save(model.state_dict(), 'epoch {} weight.pt'.format(epoch + 1))
 
         tqdm_dataset = tqdm(enumerate(eval_dataloader))
         training = False
@@ -229,7 +229,7 @@ def main(args,model_name_list):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--num_epochs", type=int, default=10)
+    parser.add_argument("--num_epochs", type=int, default=3)
     parser.add_argument("--batch_size", type=int, default=1)
     parser.add_argument("--max_len", type=int, default=1024)
     parser.add_argument("--hidden_size", type=int, default=768)

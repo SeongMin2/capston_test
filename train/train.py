@@ -109,6 +109,7 @@ def train_step(batch_item, epoch, batch, training, model, optimizer):#, device):
         return loss, acc
 
 def main(args,model_name_list):
+    '''
     bucket_processor = Bucket_processor(args.auth_key_path, args.gcp_project_id, args.gcs_bucket_name)
     # gcs에 data가 있다고 가정함
     bucket_processor.download_from_bucket(args.bucket_data_path, args.local_save_path)
@@ -128,11 +129,14 @@ def main(args,model_name_list):
     # GPU 사용
     #device = torch.device("cpu")  # cuda:0
     '''
+
+    '''
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     if (device.type == 'cuda') and (torch.cuda.device_count() > 1):
         print('Multi GPU activate')
         net = nn.DataParallel(netG, device_ids=list(range(NGPU)))
+    '''
     '''
     tokenizer= None
     model = None
@@ -226,7 +230,8 @@ def main(args,model_name_list):
         val_acc_plot.append(total_val_acc / (batch + 1))
 
     print(val_acc_plot)
-
+    '''
+    print("hi please give me the answer")
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 

@@ -227,7 +227,7 @@ def main(args,model_name_list):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--num_epochs", type=int, default=10)
+    parser.add_argument("--num_epochs", type=int, default=5)
     parser.add_argument("--batch_size", type=int, default=1)
     parser.add_argument("--max_len", type=int, default=1024)
     parser.add_argument("--hidden_size", type=int, default=768)

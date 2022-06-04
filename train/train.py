@@ -223,6 +223,7 @@ def main(args,model_name_list):
         val_loss_plot.append(total_val_loss / (batch + 1))
         val_acc_plot.append(total_val_acc / (batch + 1))
 
+    print("\nbye")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

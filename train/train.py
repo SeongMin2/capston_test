@@ -226,6 +226,7 @@ def main(args,model_name_list):
         val_acc_plot.append(total_val_acc / (batch + 1))
 
     print(val_acc_plot)
+    print('bye')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

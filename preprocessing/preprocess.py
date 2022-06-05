@@ -91,6 +91,7 @@ def main(args):
     df.to_csv(args.save_path, index=False)
     bucket_processor.upload_to_bucket(args.bucket_save_path, args.local_data_path)
     print(args.print_test)
+    print('test')
 
 
 if __name__ == "__main__":

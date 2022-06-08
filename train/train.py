@@ -16,6 +16,7 @@ from sklearn.model_selection import train_test_split
 from transformers import BartForConditionalGeneration, BartConfig
 from transformers import PreTrainedTokenizerFast
 from pytorch_pretrained_bert.optimization import BertAdam
+from torch.utils.tensorboard import SummaryWriter
 
 from text.dataset import SummaryDataset
 
@@ -113,7 +114,7 @@ def main(args,model_name_list):
     # gcs에 data가 있다고 가정함
     bucket_processor.download_from_bucket(args.bucket_data_path, args.local_save_path)
 
-
+    writer = SummaryWriter()
     dt_now = datetime.now()
 
     # gpu count
@@ -203,6 +204,9 @@ def main(args,model_name_list):
                 'Total Loss': '{:06f}'.format(total_loss / (batch + 1)),
                 'Total ACC': '{:06f}'.format(total_acc / (batch + 1))
             })
+
+        writer.add_scalar("ACCURACY/TRAIN",total_acc / (batch + 1), epoch+1)
+        writer.add_scalar("LOSS/TRAIN", total_loss/(batch + 1), epoch+1)
         loss_plot.append(total_loss / (batch + 1))
         acc_plot.append(total_acc / (batch + 1))
 
@@ -222,6 +226,10 @@ def main(args,model_name_list):
                 'Total Val Loss': '{:06f}'.format(total_val_loss / (batch + 1)),
                 'Total Val ACC': '{:06f}'.format(total_val_acc / (batch + 1))
             })
+
+        writer.add_scalar("ACCURACY/VALID", total_val_acc / (batch + 1), epoch + 1)
+        writer.add_scalar("LOSS/VALID", total_val_loss / (batch + 1), epoch + 1)
+
         val_loss_plot.append(total_val_loss / (batch + 1))
         val_acc_plot.append(total_val_acc / (batch + 1))
 
@@ -231,7 +239,7 @@ def main(args,model_name_list):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--num_epochs", type=int, default=3)
+    parser.add_argument("--num_epochs", type=int, default=3) 
     parser.add_argument("--batch_size", type=int, default=1)
     parser.add_argument("--max_len", type=int, default=1024)
     parser.add_argument("--hidden_size", type=int, default=768)

@@ -92,7 +92,6 @@ def main(args):
     bucket_processor.upload_to_bucket(args.bucket_save_path, args.local_data_path)
     #print(args.print_test)
     print('text preprocessed complete')
-    print('git pull')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

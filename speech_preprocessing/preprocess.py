@@ -18,4 +18,4 @@ Preprocess(
 )
 """)
 
-print("Generated:  torch.Size([1, 6447, 80])")  
+print("Generated:  torch.Size([1, 6447, 80])")

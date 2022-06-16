@@ -208,9 +208,9 @@ message = [
 
 for idx, text in enumerate(message):
 	if idx % 2 == 0:
-		time.sleep(4.4)
+		time.sleep(6.4)
 	else:
-		time.sleep(4)
+		time.sleep(6)
 	print(text)
 
 message = [
@@ -220,5 +220,5 @@ message = [
 
 for idx, text in enumerate(message):
 	if idx % 2 == 1:
-		time.sleep(4)
+		time.sleep(1)
 	print(text)

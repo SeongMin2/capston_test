@@ -23,4 +23,4 @@ class Bucket_processor():
         bucket = client.bucket(self.bucket_name)
 
         blob = bucket.blob(bucket_save_path)
-        blob.upload_from_filename(local_data_path)   
+        blob.upload_from_filename(local_data_path) 
